@@ -13,3 +13,13 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# Build artifacts
+bin
+dist
+
+# Project-specific environment variables, powered by direnv
+.envrc
+.env
+*.pem
+.gitconfig.local

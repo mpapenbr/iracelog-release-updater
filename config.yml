@@ -1,0 +1,32 @@
+actions:
+  - from: iracelog    
+    update:
+      - repo: iracelog-ansible-server-setup
+        file: group_vars/all/vars.yml
+        regex: '(?P<key>\s*iracelog_frontend_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: iracelog-deployment
+        file: compose/docker-compose.yml
+        regex: '(?P<key>\s*image:\s*ghcr.io/mpapenbr/iracelog-web:)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+  
+  - from: iracelog-analysis-service    
+    update:
+      - repo: iracelog-ansible-server-setup
+        file: group_vars/all/vars.yml
+        regex: '(?P<key>\s*iracelog_ias_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: iracelog-deployment
+        file: compose/docker-compose.yml
+        regex: '(?P<key>\s*image:\s*ghcr.io/mpapenbr/iracelog-analysis-service:)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+
+  - from: iracelog-service-manager
+    update:
+      - repo: iracelog-ansible-server-setup
+        file: group_vars/all/vars.yml
+        regex: '(?P<key>\s*iracelog_ism_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: iracelog-deployment
+        file: compose/docker-compose.yml
+        regex: '(?P<key>\s*image:\s*ghcr.io/mpapenbr/iracelog-service-manager:)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      
+  
+
+
+  
