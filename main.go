@@ -2,7 +2,9 @@ package main
 
 import (
 	"log"
+	"os"
 
+	"github.com/ktrysmt/go-bitbucket"
 	"github.com/mpapenbr/iracelog-release-updater/releaseupdater"
 
 	"github.com/google/go-github/v44/github"
@@ -14,19 +16,6 @@ func main() {
 	if err != nil {
 		log.Fatal("Could not read config")
 	}
-	probot.HandleEvent("create_ooo", func(ctx *probot.Context) error {
-		// Because we're listening for "release" we know the payload is a *github.ReleaseEvent
-		event := ctx.Payload.(*github.CreateEvent)
-		if *event.RefType == "tag" {
-			log.Printf("got create tag from %s\n", *event.GetRepo().Name)
-			releaseupdater.ProcessNewTag(config, ctx, event)
-
-		} else {
-			log.Printf("not interested in ref_type %s\n", *event.RefType)
-		}
-
-		return nil
-	})
 
 	probot.HandleEvent("ping", func(ctx *probot.Context) error {
 		log.Printf("Ping event recieved\n")
@@ -39,9 +28,11 @@ func main() {
 		event := ctx.Payload.(*github.ReleaseEvent)
 		if *event.Action == "published" {
 
+			c := bitbucket.Client(*bitbucket.NewBasicAuth(os.Getenv("BITBUCKET_APP_USER"), os.Getenv("BITBUCKET_APP_PASSWORD")))
+			localContext := releaseupdater.Context{Config: config, ProbotCtx: ctx, BitbucketClient: &c}
 			// log.Printf("got release published %+v\n", event)
 			log.Printf("got release published from %s\n", *event.GetRepo().Name)
-			releaseupdater.ProcessNewRelease(config, ctx, event)
+			releaseupdater.ProcessNewRelease(localContext, event)
 
 		} else {
 			log.Printf("I'm only interested in published releases.\n")
