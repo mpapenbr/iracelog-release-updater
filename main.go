@@ -12,6 +12,8 @@ import (
 )
 
 func main() {
+
+	log.Printf("iracelog-release-updater version %s\n", releaseupdater.Version)
 	config, err := releaseupdater.GetConfig("config.yml")
 	if err != nil {
 		log.Fatal("Could not read config")

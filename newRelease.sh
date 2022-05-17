@@ -12,5 +12,6 @@ echo $NO_PREFIX_TAG
 
 # updating the version in cmd/version.go
 go test ./... && \
+sed -i -E "s/(Version\W+=\W*)\"(.*?)\"/\1\"$NO_PREFIX_TAG\"/" releaseupdater/version.go && \
 git tag -a $FULL_TAG -m "Release $FULL_TAG" && \
 git push origin main --tags
