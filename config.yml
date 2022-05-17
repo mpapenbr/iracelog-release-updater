@@ -20,6 +20,10 @@ actions:
       - repo: iracelog-deployment
         files: [compose/docker-compose.yml]
         regex: '(?P<key>\s*image:\s*ghcr.io/mpapenbr/iracelog-analysis-service:)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: prod-provision
+        repoType: Bitbucket
+        files: [newlayout/roles/apps/iracelog/vars/main.yml]
+        regex: '(?P<key>\s*iracelog_ias_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
 
   - from: iracelog-service-manager
     update:
@@ -29,6 +33,10 @@ actions:
       - repo: iracelog-deployment
         files: [compose/docker-compose.yml]
         regex: '(?P<key>\s*image:\s*ghcr.io/mpapenbr/iracelog-service-manager:)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: prod-provision
+        repoType: Bitbucket
+        files: [newlayout/roles/apps/iracelog/vars/main.yml]
+        regex: '(?P<key>\s*iracelog_ism_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
       
   
 
