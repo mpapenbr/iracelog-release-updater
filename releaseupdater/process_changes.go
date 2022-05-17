@@ -90,7 +90,7 @@ func handleBitbucket(ctx Context, update Update, processContent func(content str
 			log.Printf("error reading source: %+v\n", err)
 			continue
 		}
-		log.Println(fileContent.String())
+
 		newVersion, message := processContent(string(fileContent.String()))
 		if string(newVersion) != string(fileContent.String()) {
 			fmt.Printf("Updating file %s\n", toUpdateFile)
