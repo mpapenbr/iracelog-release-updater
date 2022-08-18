@@ -37,7 +37,7 @@ func main() {
 			releaseupdater.ProcessNewRelease(localContext, event)
 
 		} else {
-			log.Printf("I'm only interested in published releases.\n")
+			log.Printf("I'm only interested in published releases. (was: %s)\n", *event.Action)
 		}
 
 		return nil
