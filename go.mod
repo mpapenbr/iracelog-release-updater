@@ -1,15 +1,15 @@
 module github.com/mpapenbr/iracelog-release-updater
 
-go 1.18
+go 1.19
 
 require (
 	github.com/google/go-github/v44 v44.1.0
+	github.com/ktrysmt/go-bitbucket v0.9.45
 	github.com/mpapenbr/go-probot v1.0.1-0.20220515215059-c45af9e26a92
 )
 
 require (
 	github.com/golang/protobuf v1.3.2 // indirect
-	github.com/ktrysmt/go-bitbucket v0.9.45 // indirect
 	github.com/mitchellh/mapstructure v0.0.0-20180220230111-00c29f56e238 // indirect
 	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2 // indirect
 	golang.org/x/oauth2 v0.0.0-20180821212333-d2e6202438be // indirect
