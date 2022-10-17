@@ -40,7 +40,7 @@ actions:
         files: [compose/docker-compose.yml]
         regex: '(?P<key>\s*image:\s*ghcr.io/mpapenbr/iracelog-service-manager:)(?P<value>v.*?)(?P<other>$|\s+\.*)'
       - repo: iracelog-deployment
-        files: [k8s/helm/iracelog-app/values.yml]
+        files: [k8s/helm/iracelog-app/values.yaml]
         regex: '(?P<key>\s*ismVersion:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
       - repo: prod-provision
         repoType: Bitbucket
