@@ -10,9 +10,13 @@ actions:
       - repo: iracelog-deployment
         files: [k8s/helm/iracelog-app/values.yaml]
         regex: '(?P<key>\s*iracelogVersion:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: iracelog-documentation
+        files: [versions.yml,README.adoc]
+        regex: '(?P<key>\s*iracelog-web:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+
       - repo: prod-provision
         repoType: Bitbucket
-        files: [newlayout/roles/apps/iracelog/vars/main.yml]
+        files: [newlayout/roles/apps/iracelog/vars/main.yml,newlayout/roles/apps/iracelog-aer/vars/main.yml]
         regex: '(?P<key>\s*iracelog_frontend_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
   
   - from: iracelog-analysis-service    
@@ -26,9 +30,12 @@ actions:
       - repo: iracelog-deployment
         files: [k8s/helm/iracelog-app/values.yaml]
         regex: '(?P<key>\s*iasVersion:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: iracelog-documentation
+        files: [versions.yml,README.adoc]
+        regex: '(?P<key>\s*iracelog-analysis-service:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
       - repo: prod-provision
         repoType: Bitbucket
-        files: [newlayout/roles/apps/iracelog/vars/main.yml]
+        files: [newlayout/roles/apps/iracelog/vars/main.yml,newlayout/roles/apps/iracelog-aer/vars/main.yml]
         regex: '(?P<key>\s*iracelog_ias_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
 
   - from: iracelog-service-manager
@@ -42,9 +49,12 @@ actions:
       - repo: iracelog-deployment
         files: [k8s/helm/iracelog-app/values.yaml]
         regex: '(?P<key>\s*ismVersion:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: iracelog-documentation
+        files: [versions.yml,README.adoc]
+        regex: '(?P<key>\s*iracelog-service-manager:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
       - repo: prod-provision
         repoType: Bitbucket
-        files: [newlayout/roles/apps/iracelog/vars/main.yml]
+        files: [newlayout/roles/apps/iracelog/vars/main.yml,newlayout/roles/apps/iracelog-aer/vars/main.yml]
         regex: '(?P<key>\s*iracelog_ism_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
 
   - from: iracelog-graphql
@@ -58,10 +68,20 @@ actions:
       - repo: iracelog-deployment
         files: [k8s/helm/iracelog-app/values.yaml]
         regex: '(?P<key>\s*graphqlVersion:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: iracelog-documentation
+        files: [versions.yml,README.adoc]
+        regex: '(?P<key>\s*iracelog-graphql:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
       - repo: prod-provision
         repoType: Bitbucket
-        files: [newlayout/roles/apps/iracelog/vars/main.yml]
+        files: [newlayout/roles/apps/iracelog/vars/main.yml,newlayout/roles/apps/iracelog-aer/vars/main.yml]
         regex: '(?P<key>\s*iracelog_graphql_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+
+  - from: python-racelogger
+    update:      
+      - repo: iracelog-documentation
+        files: [versions.yml,README.adoc]
+        regex: '(?P<key>\s*racelogger:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      
       
   
 
