@@ -69,6 +69,52 @@ actions:
           ]
         regex: '(?P<key>\s*iracelog_ism_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
 
+  - from: iracelog-service-manager-go
+    update:
+      - repo: iracelog-ansible-server-setup
+        files: [group_vars/all/vars.yml]
+        regex: '(?P<key>\s*iracelog_ism_go_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: iracelog-deployment
+        files: [compose/docker-compose.yml]
+        regex: '(?P<key>\s*image:\s*ghcr.io/mpapenbr/iracelog-service-manager-go:)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: iracelog-deployment
+        files: [k8s/helm/iracelog-app/values.yaml]
+        regex: '(?P<key>\s*ismVersion:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: iracelog-documentation
+        files: [versions.yml, README.adoc]
+        regex: '(?P<key>\s*iracelog-service-manager-go:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: prod-provision
+        repoType: Bitbucket
+        files:
+          [
+            newlayout/roles/apps/iracelog/vars/main.yml,
+            newlayout/roles/apps/iracelog-aer/vars/main.yml,
+          ]
+        regex: '(?P<key>\s*iracelog_ism_go_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+
+  - from: iracelog-wamp-router
+    update:
+      - repo: iracelog-ansible-server-setup
+        files: [group_vars/all/vars.yml]
+        regex: '(?P<key>\s*iracelog_wamp_router:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: iracelog-deployment
+        files: [compose/docker-compose.yml]
+        regex: '(?P<key>\s*image:\s*ghcr.io/mpapenbr/iracelog-wamp-router:)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: iracelog-deployment
+        files: [k8s/helm/iracelog-app/values.yaml]
+        regex: '(?P<key>\s*iwrVersion:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: iracelog-documentation
+        files: [versions.yml, README.adoc]
+        regex: '(?P<key>\s*iracelog-wamp-router:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: prod-provision
+        repoType: Bitbucket
+        files:
+          [
+            newlayout/roles/apps/iracelog/vars/main.yml,
+            newlayout/roles/apps/iracelog-aer/vars/main.yml,
+          ]
+        regex: '(?P<key>\s*iracelog_iwr_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+
   - from: iracelog-graphql
     update:
       - repo: iracelog-ansible-server-setup
