@@ -1,19 +1,20 @@
 module github.com/mpapenbr/iracelog-release-updater
 
-go 1.19
+go 1.20
 
 require (
 	github.com/google/go-github/v44 v44.1.0
-	github.com/ktrysmt/go-bitbucket v0.9.45
+	github.com/ktrysmt/go-bitbucket v0.9.55
 	github.com/mpapenbr/go-probot v1.0.1-0.20220515215059-c45af9e26a92
 )
 
 require (
-	github.com/golang/protobuf v1.3.2 // indirect
-	github.com/mitchellh/mapstructure v0.0.0-20180220230111-00c29f56e238 // indirect
-	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2 // indirect
-	golang.org/x/oauth2 v0.0.0-20180821212333-d2e6202438be // indirect
+	github.com/golang/protobuf v1.5.3 // indirect
+	github.com/mitchellh/mapstructure v1.5.0 // indirect
+	golang.org/x/net v0.8.0 // indirect
+	golang.org/x/oauth2 v0.6.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
+	google.golang.org/protobuf v1.30.0 // indirect
 )
 
 require (
@@ -22,6 +23,6 @@ require (
 	github.com/google/go-github/v29 v29.0.3 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
-	golang.org/x/crypto v0.0.0-20220513210258-46612604a0f9 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20220512140231-539c8e751b99
+	golang.org/x/crypto v0.7.0 // indirect
+	gopkg.in/yaml.v3 v3.0.1
 )
