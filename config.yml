@@ -149,3 +149,17 @@ actions:
       - repo: iracelog-documentation
         files: [versions.yml, README.adoc]
         regex: '(?P<key>\s*racelogctl:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+
+  - from: istint
+    update:
+      - repo: prod-provision
+        repoType: Bitbucket
+        files: [newlayout/roles/apps/istint/vars/main.yml]
+        regex: '(?P<key>\s*istint_frontend_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+
+  - from: istint-backend
+    update:
+      - repo: prod-provision
+        repoType: Bitbucket
+        files: [newlayout/roles/apps/istint/vars/main.yml]
+        regex: '(?P<key>\s*istint_backend_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
