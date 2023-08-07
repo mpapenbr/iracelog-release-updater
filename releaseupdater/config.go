@@ -1,8 +1,8 @@
 package releaseupdater
 
 import (
-	"io/ioutil"
 	"log"
+	"os"
 
 	"github.com/ktrysmt/go-bitbucket"
 	"github.com/mpapenbr/go-probot/probot"
@@ -20,6 +20,7 @@ type Update struct {
 	Repo     string   // name of the repo
 	Files    []string // reference to files in repo
 	Regex    string   // regex for searching the to-be-replaced item
+	Branch   string   `yaml:"branch"` // target branch for update
 }
 
 type Action struct {
@@ -33,7 +34,7 @@ type Config struct {
 }
 
 func GetConfig(configFilename string) (*Config, error) {
-	yamlFile, err := ioutil.ReadFile(configFilename)
+	yamlFile, err := os.ReadFile(configFilename)
 	if err != nil {
 		log.Printf("yamlFile.Get err   #%v ", err)
 		return nil, err

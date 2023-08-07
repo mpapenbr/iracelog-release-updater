@@ -15,6 +15,7 @@ actions:
         regex: '(?P<key>\s*iracelog-web:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
 
       - repo: prod-provision
+        branch: master
         repoType: Bitbucket
         files:
           [
@@ -42,6 +43,7 @@ actions:
         files: [versions.yml, README.adoc]
         regex: '(?P<key>\s*iracelog-analysis-service:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
       - repo: prod-provision
+        branch: master
         repoType: Bitbucket
         files:
           [
@@ -69,6 +71,7 @@ actions:
         files: [versions.yml, README.adoc]
         regex: '(?P<key>\s*iracelog-service-manager:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
       - repo: prod-provision
+        branch: master
         repoType: Bitbucket
         files:
           [
@@ -92,6 +95,7 @@ actions:
         files: [versions.yml, README.adoc]
         regex: '(?P<key>\s*iracelog-service-manager-go:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
       - repo: prod-provision
+        branch: master
         repoType: Bitbucket
         files:
           [
@@ -119,6 +123,7 @@ actions:
         files: [versions.yml, README.adoc]
         regex: '(?P<key>\s*iracelog-wamp-router:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
       - repo: prod-provision
+        branch: master
         repoType: Bitbucket
         files:
           [
@@ -146,6 +151,7 @@ actions:
         files: [versions.yml, README.adoc]
         regex: '(?P<key>\s*iracelog-graphql:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
       - repo: prod-provision
+        branch: master
         repoType: Bitbucket
         files:
           [
@@ -173,6 +179,7 @@ actions:
   - from: istint
     update:
       - repo: prod-provision
+        branch: master
         repoType: Bitbucket
         files: [newlayout/roles/apps/istint/vars/main.yml]
         regex: '(?P<key>\s*istint_frontend_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
@@ -180,6 +187,7 @@ actions:
   - from: istint-backend
     update:
       - repo: prod-provision
+        branch: master
         repoType: Bitbucket
         files: [newlayout/roles/apps/istint/vars/main.yml]
         regex: '(?P<key>\s*istint_backend_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'

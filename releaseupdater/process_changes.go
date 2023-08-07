@@ -40,6 +40,7 @@ func ProcessNewRelease(ctx Context, release *github.ReleaseEvent) {
 }
 
 func handleGithub(ctx Context, repoOwner string, update Update, processContent func(content string) (string, string)) {
+	targetBranch := getBranch(update)
 	for _, toUpdateFile := range update.Files {
 		content, _, _, err := ctx.ProbotCtx.GitHub.Repositories.GetContents(
 			context.Background(),
@@ -69,6 +70,7 @@ func handleGithub(ctx Context, repoOwner string, update Update, processContent f
 					Content: []byte(newVersion),
 					Message: github.String(message),
 					SHA:     github.String(*content.SHA),
+					Branch:  &targetBranch,
 				})
 
 			if err != nil {
@@ -82,10 +84,13 @@ func handleGithub(ctx Context, repoOwner string, update Update, processContent f
 }
 
 func handleBitbucket(ctx Context, update Update, processContent func(content string) (string, string)) {
+	targetBranch := getBranch(update)
 	for _, toUpdateFile := range update.Files {
 		fileContent, err := ctx.BitbucketClient.Repositories.Repository.GetFileBlob(
-			&bitbucket.RepositoryBlobOptions{Owner: "mpapenbr",
-				RepoSlug: update.Repo, Path: toUpdateFile, Ref: "master"})
+			&bitbucket.RepositoryBlobOptions{
+				Owner:    "mpapenbr",
+				RepoSlug: update.Repo, Path: toUpdateFile, Ref: targetBranch,
+			})
 		if err != nil {
 			log.Printf("error reading source: %+v\n", err)
 			continue
@@ -104,7 +109,7 @@ func handleBitbucket(ctx Context, update Update, processContent func(content str
 				RepoSlug: update.Repo,
 				FilePath: f.Name(),
 				FileName: toUpdateFile,
-				Branch:   "master",
+				Branch:   targetBranch,
 				Message:  message,
 			})
 			log.Printf("Deleting temp file %s\n", f.Name())
@@ -115,5 +120,13 @@ func handleBitbucket(ctx Context, update Update, processContent func(content str
 		} else {
 			log.Println("No changes detected")
 		}
+	}
+}
+
+func getBranch(update Update) string {
+	if len(update.Branch) > 0 {
+		return update.Branch
+	} else {
+		return "main"
 	}
 }
