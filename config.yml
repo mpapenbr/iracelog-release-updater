@@ -22,6 +22,10 @@ actions:
             newlayout/roles/apps/iracelog-aer/vars/main.yml,
           ]
         regex: '(?P<key>\s*iracelog_frontend_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: linux-provision
+        repoType: Bitbucket
+        files: [inventory/group_vars/all/iracelog.yml]
+        regex: '(?P<key>\s*iracelog_frontend_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
 
   - from: iracelog-analysis-service
     update:
@@ -44,6 +48,10 @@ actions:
             newlayout/roles/apps/iracelog/vars/main.yml,
             newlayout/roles/apps/iracelog-aer/vars/main.yml,
           ]
+        regex: '(?P<key>\s*iracelog_ias_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: linux-provision
+        repoType: Bitbucket
+        files: [inventory/group_vars/all/iracelog.yml]
         regex: '(?P<key>\s*iracelog_ias_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
 
   - from: iracelog-service-manager
@@ -91,6 +99,10 @@ actions:
             newlayout/roles/apps/iracelog-aer/vars/main.yml,
           ]
         regex: '(?P<key>\s*iracelog_ism_go_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: linux-provision
+        repoType: Bitbucket
+        files: [inventory/group_vars/all/iracelog.yml]
+        regex: '(?P<key>\s*iracelog_ism_go_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
 
   - from: iracelog-wamp-router
     update:
@@ -114,6 +126,10 @@ actions:
             newlayout/roles/apps/iracelog-aer/vars/main.yml,
           ]
         regex: '(?P<key>\s*iracelog_iwr_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: linux-provision
+        repoType: Bitbucket
+        files: [inventory/group_vars/all/iracelog.yml]
+        regex: '(?P<key>\s*iracelog_iwr_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
 
   - from: iracelog-graphql
     update:
@@ -136,6 +152,10 @@ actions:
             newlayout/roles/apps/iracelog/vars/main.yml,
             newlayout/roles/apps/iracelog-aer/vars/main.yml,
           ]
+        regex: '(?P<key>\s*iracelog_graphql_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+      - repo: linux-provision
+        repoType: Bitbucket
+        files: [inventory/group_vars/all/iracelog.yml]
         regex: '(?P<key>\s*iracelog_graphql_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
 
   - from: python-racelogger
