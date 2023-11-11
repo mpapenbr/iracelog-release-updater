@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/google/go-github/v44 v44.1.0
-	github.com/ktrysmt/go-bitbucket v0.9.70
+	github.com/ktrysmt/go-bitbucket v0.9.71
 	github.com/mpapenbr/go-probot v1.0.1-0.20220515215059-c45af9e26a92
 )
 
