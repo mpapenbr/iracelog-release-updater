@@ -25,9 +25,18 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - uses: release-drafter/release-drafter@v5
+        id: rd
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: prepare changlog
+        run: |
+          echo "${{ steps.rd.outputs.body }}" > "${{ runner.temp }}/CHANGELOG.md"
+
       - name: Release via goreleaser
         uses: goreleaser/goreleaser-action@v5
         with:
-          args: release
+          args: release --release-notes="${{ runner.temp }}/CHANGELOG.md"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
