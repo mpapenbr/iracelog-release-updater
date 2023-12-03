@@ -36,6 +36,11 @@ func main() {
 				Config: config, ProbotCtx: ctx, BitbucketClient: &c,
 			}
 
+			if event.Release.GetPrerelease() {
+				log.Printf("Prereleases are not handled here repo=%s tag=%s\n",
+					*event.GetRepo().Name, *event.Release.TagName)
+				return nil
+			}
 			log.Printf("got release published from %s\n", *event.GetRepo().Name)
 			releaseupdater.ProcessNewRelease(localContext, event)
 		} else {
