@@ -9,18 +9,19 @@ import (
 returns a copy of content where versions according to the regex are replaced.
 
 Example:
- (?P<key>\s*version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)
+
+	(?P<key>\s*version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)
 
 Important: the regex MUST define the following groups keys and other in order to work.
 Otherwise the version is not replaced.
 
-key defines the key including the preceeding characters. This may be needed for
+key defines the key including the preceding characters. This may be needed for
 formats like YAML.
 
-other contains everything you want to keep in that line behind the version value to replace.
+other contains everything you want to keep in that line behind the version value to
+replace.
 */
 func ReplaceVersion(content []byte, regex, newVersion string) []byte {
-
 	r, err := regexp.Compile(regex)
 	if err != nil {
 		fmt.Printf("Error compiling regex %v: %v\n", regex, err)
@@ -28,7 +29,7 @@ func ReplaceVersion(content []byte, regex, newVersion string) []byte {
 	}
 
 	ret := r.ReplaceAll(content, []byte(fmt.Sprintf("${key}%s${other}", newVersion)))
-	// fmt.Println(string(ret))
+
 	return ret
 }
 
