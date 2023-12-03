@@ -6,7 +6,12 @@
   "image": "mcr.microsoft.com/devcontainers/go:1.21",
   // alternative: use the bullseye image
   // "image": "mcr.microsoft.com/devcontainers/go:1.20-bullseye",
-  "runArgs": ["--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined", "--network=host"],
+  "runArgs": [
+    "--cap-add=SYS_PTRACE",
+    "--security-opt",
+    "seccomp=unconfined",
+    "--network=host"
+  ],
 
   "customizations": {
     "vscode": {
@@ -21,7 +26,9 @@
         },
         "[go]": {
           "editor.rulers": [90]
-        }
+        },
+        "editor.defaultFormatter": "golang.go",
+        "editor.formatOnSave": true
       },
       // Add the IDs of extensions you want installed when the container is created.
       "extensions": [

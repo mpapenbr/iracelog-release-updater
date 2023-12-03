@@ -14,13 +14,15 @@ import (
 
 func ProcessNewRelease(ctx Context, release *github.ReleaseEvent) {
 	fmt.Printf("Incoming release event from %s\n", *release.Repo.FullName)
-	for _, action := range ctx.Config.Actions {
+	for i := range ctx.Config.Actions {
+		action := ctx.Config.Actions[i]
 		if action.From == *release.Repo.Name {
 			commitComponent := release.Repo.Name
 			if action.Component != "" {
 				commitComponent = &action.Component
 			}
-			for _, update := range action.Update {
+			for j := range action.Update {
+				update := action.Update[j]
 				log.Printf("%v\n", update)
 				repoOwner := *release.Repo.Owner.Login
 				replacer := func(content string) (string, string) {
@@ -33,13 +35,17 @@ func ProcessNewRelease(ctx Context, release *github.ReleaseEvent) {
 				default:
 					handleGithub(ctx, repoOwner, update, replacer)
 				}
-
 			}
 		}
 	}
 }
 
-func handleGithub(ctx Context, repoOwner string, update Update, processContent func(content string) (string, string)) {
+//nolint:whitespace //can't make all linters happy
+func handleGithub(
+	ctx Context, repoOwner string,
+	update Update,
+	processContent func(content string) (string, string),
+) {
 	targetBranch := getBranch(update)
 	for _, toUpdateFile := range update.Files {
 		content, _, _, err := ctx.ProbotCtx.GitHub.Repositories.GetContents(
@@ -53,13 +59,12 @@ func handleGithub(ctx Context, repoOwner string, update Update, processContent f
 			continue
 		}
 		fileContent, _ := b64.StdEncoding.DecodeString(*content.Content)
-		// log.Printf("Content: <%s>\n", fileContent)
+
 		log.Printf("RegEx: <%s>\n", update.Regex)
-		// log.Printf("Resp: %+v\n", *resp)
+
 		newVersion, message := processContent(string(fileContent))
-		if string(newVersion) != string(fileContent) {
+		if newVersion != string(fileContent) {
 			fmt.Printf("Updating file %s\n", toUpdateFile)
-			// fmt.Printf("NewContent: <%s>\n", string(newVersion))
 
 			_, _, err = ctx.ProbotCtx.GitHub.Repositories.UpdateFile(
 				context.Background(),
@@ -83,7 +88,12 @@ func handleGithub(ctx Context, repoOwner string, update Update, processContent f
 	}
 }
 
-func handleBitbucket(ctx Context, update Update, processContent func(content string) (string, string)) {
+//nolint:whitespace,funlen //can't make all linters happy
+func handleBitbucket(
+	ctx Context,
+	update Update,
+	processContent func(content string) (string, string),
+) {
 	targetBranch := getBranch(update)
 	for _, toUpdateFile := range update.Files {
 		fileContent, err := ctx.BitbucketClient.Repositories.Repository.GetFileBlob(
@@ -96,25 +106,32 @@ func handleBitbucket(ctx Context, update Update, processContent func(content str
 			continue
 		}
 
-		newVersion, message := processContent(string(fileContent.String()))
-		if string(newVersion) != string(fileContent.String()) {
+		newVersion, message := processContent(fileContent.String())
+		//nolint:nestif //checked
+		if newVersion != fileContent.String() {
 			fmt.Printf("Updating file %s\n", toUpdateFile)
 
 			f, _ := os.CreateTemp("", "bbupload")
-			f.WriteString(newVersion)
+			if _, err = f.WriteString(newVersion); err != nil {
+				log.Printf("could not write temp upload file: %+v\n", err)
+				f.Close()
+				continue
+			}
 			f.Close()
 
-			err := ctx.BitbucketClient.Repositories.Repository.WriteFileBlob(&bitbucket.RepositoryBlobWriteOptions{
-				Owner:    "mpapenbr",
-				RepoSlug: update.Repo,
-				FilePath: f.Name(),
-				FileName: toUpdateFile,
-				Branch:   targetBranch,
-				Message:  message,
-			})
+			if err = ctx.BitbucketClient.Repositories.Repository.WriteFileBlob(
+				&bitbucket.RepositoryBlobWriteOptions{
+					Owner:    "mpapenbr",
+					RepoSlug: update.Repo,
+					FilePath: f.Name(),
+					FileName: toUpdateFile,
+					Branch:   targetBranch,
+					Message:  message,
+				}); err != nil {
+				log.Printf("error upload file to bitbucket: %+v\n", err)
+			}
 			log.Printf("Deleting temp file %s\n", f.Name())
-			err = os.Remove(f.Name())
-			if err != nil {
+			if err = os.Remove(f.Name()); err != nil {
 				log.Printf("Error deleting temp file %s: %v\n", f.Name(), err)
 			}
 		} else {

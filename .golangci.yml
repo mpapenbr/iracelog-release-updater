@@ -111,7 +111,7 @@ linters-settings:
     sections:
       - standard # standard packages
       - default # all other imports that do not fall in any group
-      - prefix(github.com/mpapenbr/iracelog-service-manager-go) # internal imports from `iracelog-service-manager-go`
+      - prefix(github.com/mpapenbr/iracelog-release-updater) # internal imports from `iracelog-release-updater`
     section-separators:
       - newLine
 
@@ -233,7 +233,7 @@ linters-settings:
   goimports:
     # put imports beginning with prefix after 3rd-party packages;
     # it's a comma-separated list of prefixes
-    local-prefixes: "github.com/mpapenbr/iracelog-service-manager-go"
+    local-prefixes: "github.com/mpapenbr/iracelog-release-updater"
 
   golint:
     # minimal confidence for issues, default is 0.8
@@ -466,20 +466,17 @@ linters:
   disable-all: true # disable all, selectively enable what is needed
   enable:
     # Defaults
-    - deadcode
     - errcheck
     - gosimple
     - govet
     - ineffassign
     - staticcheck
-    - structcheck
     - typecheck
     - unused
-    - varcheck
 
     # Additional
     - cyclop
-    - depguard
+    # - depguard
     - dogsled
     - dupl
     - errname
@@ -498,7 +495,6 @@ linters:
     # - gomnd too noisy
     - goprintffuncname
     - gosec
-    - ifshort
     - lll
     - makezero
     - misspell
