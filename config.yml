@@ -84,16 +84,16 @@ actions:
     update:
       - repo: iracelog-ansible-server-setup
         files: [group_vars/all/vars.yml]
-        regex: '(?P<key>\s*iracelog_ism_go_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+        regex: '(?P<key>\s*iracelog_ism_go_version:\s*)(?P<value>v?.*?)(?P<other>$|\s+\.*)'
       - repo: iracelog-deployment
         files: [compose/docker-compose.yml]
-        regex: '(?P<key>\s*image:\s*ghcr.io/mpapenbr/iracelog-service-manager-go:)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+        regex: '(?P<key>\s*image:\s*ghcr.io/mpapenbr/iracelog-service-manager-go:)(?P<value>v?.*?)(?P<other>$|\s+\.*)'
       - repo: iracelog-deployment
         files: [k8s/helm/iracelog-app/values.yaml]
-        regex: '(?P<key>\s*ismVersion:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+        regex: '(?P<key>\s*ismVersion:\s*)(?P<value>v?.*?)(?P<other>$|\s+\.*)'
       - repo: iracelog-documentation
         files: [versions.yml, README.adoc]
-        regex: '(?P<key>\s*iracelog-service-manager-go:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+        regex: '(?P<key>\s*iracelog-service-manager-go:\s*)(?P<value>v?.*?)(?P<other>$|\s+\.*)'
       - repo: prod-provision
         branch: master
         repoType: Bitbucket
@@ -102,11 +102,11 @@ actions:
             newlayout/roles/apps/iracelog/vars/main.yml,
             newlayout/roles/apps/iracelog-aer/vars/main.yml,
           ]
-        regex: '(?P<key>\s*iracelog_ism_go_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+        regex: '(?P<key>\s*iracelog_ism_go_version:\s*)(?P<value>v?.*?)(?P<other>$|\s+\.*)'
       - repo: linux-provision
         repoType: Bitbucket
         files: [inventory/group_vars/all/iracelog.yml]
-        regex: '(?P<key>\s*iracelog_ism_go_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
+        regex: '(?P<key>\s*iracelog_ism_go_version:\s*)(?P<value>v?.*?)(?P<other>$|\s+\.*)'
 
   - from: iracelog-wamp-router
     update:
