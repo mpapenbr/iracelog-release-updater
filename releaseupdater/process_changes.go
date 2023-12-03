@@ -123,8 +123,7 @@ func handleBitbucket(
 				&bitbucket.RepositoryBlobWriteOptions{
 					Owner:    "mpapenbr",
 					RepoSlug: update.Repo,
-					FilePath: f.Name(),
-					FileName: toUpdateFile,
+					Files:    []bitbucket.File{{Path: f.Name(), Name: toUpdateFile}},
 					Branch:   targetBranch,
 					Message:  message,
 				}); err != nil {
