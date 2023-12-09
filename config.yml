@@ -28,58 +28,6 @@ actions:
         files: [inventory/group_vars/all/iracelog.yml]
         regex: '(?P<key>\s*iracelog_frontend_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
 
-  - from: iracelog-analysis-service
-    update:
-      - repo: iracelog-ansible-server-setup
-        files: [group_vars/all/vars.yml]
-        regex: '(?P<key>\s*iracelog_ias_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
-      - repo: iracelog-deployment
-        files: [compose/docker-compose.yml]
-        regex: '(?P<key>\s*image:\s*ghcr.io/mpapenbr/iracelog-analysis-service:)(?P<value>v.*?)(?P<other>$|\s+\.*)'
-      - repo: iracelog-deployment
-        files: [k8s/helm/iracelog-app/values.yaml]
-        regex: '(?P<key>\s*iasVersion:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
-      - repo: iracelog-documentation
-        files: [versions.yml, README.adoc]
-        regex: '(?P<key>\s*iracelog-analysis-service:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
-      - repo: prod-provision
-        branch: master
-        repoType: Bitbucket
-        files:
-          [
-            newlayout/roles/apps/iracelog/vars/main.yml,
-            newlayout/roles/apps/iracelog-aer/vars/main.yml,
-          ]
-        regex: '(?P<key>\s*iracelog_ias_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
-      - repo: linux-provision
-        repoType: Bitbucket
-        files: [inventory/group_vars/all/iracelog.yml]
-        regex: '(?P<key>\s*iracelog_ias_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
-
-  - from: iracelog-service-manager
-    update:
-      - repo: iracelog-ansible-server-setup
-        files: [group_vars/all/vars.yml]
-        regex: '(?P<key>\s*iracelog_ism_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
-      - repo: iracelog-deployment
-        files: [compose/docker-compose.yml]
-        regex: '(?P<key>\s*image:\s*ghcr.io/mpapenbr/iracelog-service-manager:)(?P<value>v.*?)(?P<other>$|\s+\.*)'
-      - repo: iracelog-deployment
-        files: [k8s/helm/iracelog-app/values.yaml]
-        regex: '(?P<key>\s*ismVersion:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
-      - repo: iracelog-documentation
-        files: [versions.yml, README.adoc]
-        regex: '(?P<key>\s*iracelog-service-manager:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
-      - repo: prod-provision
-        branch: master
-        repoType: Bitbucket
-        files:
-          [
-            newlayout/roles/apps/iracelog/vars/main.yml,
-            newlayout/roles/apps/iracelog-aer/vars/main.yml,
-          ]
-        regex: '(?P<key>\s*iracelog_ism_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
-
   - from: iracelog-service-manager-go
     update:
       - repo: iracelog-ansible-server-setup
@@ -164,7 +112,7 @@ actions:
         files: [inventory/group_vars/all/iracelog.yml]
         regex: '(?P<key>\s*iracelog_graphql_version:\s*)(?P<value>v.*?)(?P<other>$|\s+\.*)'
 
-  - from: python-racelogger
+  - from: go-racelogger
     update:
       - repo: iracelog-documentation
         files: [versions.yml, README.adoc]
