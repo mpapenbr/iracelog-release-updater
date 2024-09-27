@@ -1,6 +1,6 @@
 module github.com/mpapenbr/iracelog-release-updater
 
-go 1.21
+go 1.23
 
 require (
 	github.com/google/go-github/v44 v44.1.0
@@ -10,8 +10,8 @@ require (
 
 require (
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
-	golang.org/x/net v0.24.0 // indirect
-	golang.org/x/oauth2 v0.20.0 // indirect
+	golang.org/x/net v0.29.0 // indirect
+	golang.org/x/oauth2 v0.23.0 // indirect
 )
 
 require (
@@ -19,7 +19,7 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/google/go-github/v29 v29.0.3 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
-	github.com/gorilla/mux v1.8.0 // indirect
-	golang.org/x/crypto v0.22.0 // indirect
+	github.com/gorilla/mux v1.8.1 // indirect
+	golang.org/x/crypto v0.27.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1
 )

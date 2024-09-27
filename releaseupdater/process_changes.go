@@ -77,7 +77,6 @@ func handleGithub(
 					SHA:     github.String(*content.SHA),
 					Branch:  &targetBranch,
 				})
-
 			if err != nil {
 				log.Printf("error updating %s: %+v\n", toUpdateFile, err)
 				continue
@@ -140,7 +139,7 @@ func handleBitbucket(
 }
 
 func getBranch(update Update) string {
-	if len(update.Branch) > 0 {
+	if update.Branch != "" {
 		return update.Branch
 	} else {
 		return "main"
