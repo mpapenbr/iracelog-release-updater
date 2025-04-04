@@ -27,7 +27,11 @@ func ProcessNewRelease(ctx Context, release *github.ReleaseEvent) {
 				repoOwner := *release.Repo.Owner.Login
 				replacer := func(content string) (string, string) {
 					return ReplaceVersionString(content, update.Regex, *release.Release.TagName),
-						fmt.Sprintf("pkg: Bump %s to %s", *commitComponent, *release.Release.TagName)
+						fmt.Sprintf(
+							"pkg: Bump %s to %s",
+							*commitComponent,
+							*release.Release.TagName,
+						)
 				}
 				switch strings.ToLower(update.RepoType) {
 				case "bitbucket":

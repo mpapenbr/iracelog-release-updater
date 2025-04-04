@@ -38,7 +38,8 @@
         "github.vscode-pull-request-github",
         "EditorConfig.EditorConfig",
         "cschleiden.vscode-github-actions",
-        "GitHub.copilot"
+        "GitHub.copilot",
+        "redhat.vscode-yaml"
       ]
     }
   },
@@ -57,7 +58,7 @@
   "remoteUser": "vscode",
   "features": {
     "ghcr.io/devcontainers/features/go": {
-      "version": "1.23"
+      "version": "1.24"
     },
     "ghcr.io/devcontainers/features/docker-in-docker": "latest"
     // "ghcr.io/devcontainers-contrib/features/pre-commit": "latest"

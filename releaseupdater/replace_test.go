@@ -47,10 +47,26 @@ func TestReplaceVersionString(t *testing.T) {
 	}{
 		{name: "empty", args: args{content: "", regex: ".*", newVersion: "v1.0"}, want: "v1.0"},
 		{name: "invalid re", args: args{content: "", regex: "?<*", newVersion: "v1.0"}, want: ""},
-		{name: "optional v, no v in tag", args: args{content: "version: 0.0.0", regex: optionalV, newVersion: "v1.0"}, want: "version: v1.0"},
-		{name: "optional v, v in tag", args: args{content: "version: v0.0.0", regex: optionalV, newVersion: "v1.0"}, want: "version: v1.0"},
-		{name: "key value complete", args: args{content: "version: v0.0.0", regex: referenceRE, newVersion: "v1.0"}, want: "version: v1.0"},
-		{name: "with quotes", args: args{content: "version: \"v0.0.0\"", regex: withQuotesRE, newVersion: "v1.0"}, want: "version: \"v1.0\""},
+		{
+			name: "optional v, no v in tag",
+			args: args{content: "version: 0.0.0", regex: optionalV, newVersion: "v1.0"},
+			want: "version: v1.0",
+		},
+		{
+			name: "optional v, v in tag",
+			args: args{content: "version: v0.0.0", regex: optionalV, newVersion: "v1.0"},
+			want: "version: v1.0",
+		},
+		{
+			name: "key value complete",
+			args: args{content: "version: v0.0.0", regex: referenceRE, newVersion: "v1.0"},
+			want: "version: v1.0",
+		},
+		{
+			name: "with quotes",
+			args: args{content: "version: \"v0.0.0\"", regex: withQuotesRE, newVersion: "v1.0"},
+			want: "version: \"v1.0\"",
+		},
 		{
 			name: "complex multiline", args: args{
 				regex: referenceRE, newVersion: "v1.0",
