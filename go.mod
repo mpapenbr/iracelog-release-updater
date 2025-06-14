@@ -4,7 +4,7 @@ go 1.24
 
 require (
 	github.com/google/go-github/v44 v44.1.0
-	github.com/ktrysmt/go-bitbucket v0.9.85
+	github.com/ktrysmt/go-bitbucket v0.9.86
 	github.com/mpapenbr/go-probot v1.0.1-0.20220515215059-c45af9e26a92
 )
 
@@ -12,7 +12,7 @@ require (
 	github.com/kr/text v0.2.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	golang.org/x/net v0.39.0 // indirect
-	golang.org/x/oauth2 v0.29.0 // indirect
+	golang.org/x/oauth2 v0.30.0 // indirect
 )
 
 require (
