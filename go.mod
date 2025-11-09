@@ -1,6 +1,6 @@
 module github.com/mpapenbr/iracelog-release-updater
 
-go 1.24
+go 1.25
 
 require (
 	github.com/google/go-github/v44 v44.1.0

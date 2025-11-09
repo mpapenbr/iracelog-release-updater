@@ -25,9 +25,10 @@
           "formatting.gofumpt": true
         },
         "[go]": {
-          "editor.rulers": [90]
+          "editor.rulers": [90],
+          "editor.defaultFormatter": "golang.go"
         },
-        "editor.defaultFormatter": "golang.go",
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true
       },
       // Add the IDs of extensions you want installed when the container is created.
@@ -58,7 +59,7 @@
   "remoteUser": "vscode",
   "features": {
     "ghcr.io/devcontainers/features/go": {
-      "version": "1.24"
+      "version": "1.25"
     },
     "ghcr.io/devcontainers/features/docker-in-docker": "latest"
     // "ghcr.io/devcontainers-contrib/features/pre-commit": "latest"
