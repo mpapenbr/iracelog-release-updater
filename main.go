@@ -29,11 +29,15 @@ func main() {
 		event := ctx.Payload.(*github.ReleaseEvent)
 
 		if *event.Action == "published" {
-			c := *bitbucket.NewBasicAuth(
+			c, err := bitbucket.NewBasicAuth(
 				os.Getenv("BITBUCKET_APP_USER"),
 				os.Getenv("BITBUCKET_APP_PASSWORD"))
+			if err != nil {
+				log.Printf("Could not create Bitbucket basic auth: %v\n", err)
+				return nil
+			}
 			localContext := releaseupdater.Context{
-				Config: config, ProbotCtx: ctx, BitbucketClient: &c,
+				Config: config, ProbotCtx: ctx, BitbucketClient: c,
 			}
 
 			if event.Release.GetPrerelease() {
